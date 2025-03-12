@@ -1,6 +1,21 @@
 {
   "timeZone": "Asia/Bangkok",
-  "dependencies": {},
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "SlackApp",
+        "version": "0",
+        "libraryId": "1cav3fFq0bCL4jVvAMkMtr46Xin7kWajDoPUtv5yW_2J9epY0ycNMAS6z",
+        "developmentMode": true
+      },
+      {
+        "userSymbol": "UtilServiceApp",
+        "version": "0",
+        "libraryId": "1QxQaI_6CY-9y6b_WtsFll_GUIAKXucLerMBjURgvvO8fGIVz3WpGkQfY",
+        "developmentMode": true
+      }
+    ]
+  },
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
   "webapp": {

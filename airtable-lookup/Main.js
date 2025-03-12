@@ -1,23 +1,26 @@
 function onFormSubmit(e) {
- 
+
   try {
     const values = e?.values;
-    if(!values) {
+    if (!values) {
       throw new Error('Invalid submitted data!');
     }
     const sheet = SpreadsheetApp.getActiveSheet();
 
-    const statusColumnIndex = 13; 
+    const statusColumnIndex = 13;
 
     const lastRow = sheet.getLastRow();
 
     if (!sheet.getRange(lastRow, statusColumnIndex).getValue()) {
       sheet.getRange(lastRow, statusColumnIndex).setValue("Pending");
     }
-    const message = buildLeaveRequestMessage(values);
-    sendToSlack(message);
+    // const message = buildLeaveRequestMessage(values);
+    // sendToSlack(message);
+    const message = SlackApp.buildLeaveRequestMessage(values);
+    SlackApp.sendToSlack(message);
   } catch (err) {
-    logToSheet(err);
+    // logToSheet(err);
+    UtilServiceApp.logToSheet(err);
   }
 }
 
@@ -28,7 +31,7 @@ function onEdit(e) {
   if (range.getColumn() === STATUS_COL) {
     const row = range.getRow();
     const requesterEmail = sheet.getRange(row, REQUESTER_EMAIL_COL).getValue();
-    const userId = getSlackUserIdByEmail(requesterEmail); 
+    const userId = getSlackUserIdByEmail(requesterEmail);
     const data = {
       userName: sheet.getRange(row, USER_NAME_COL).getValue(),
       requesterEmail,
@@ -41,7 +44,9 @@ function onEdit(e) {
       managerEmail: Session.getActiveUser().getEmail(),
     };
 
-      sendEmailToRequester(data);
-      sendLeaveResponseSlackMessage(data);
+    // sendEmailToRequester(data);
+    // sendLeaveResponseSlackMessage(data);
+    SlackApp.sendEmailToRequester(data);
+    SlackApp.sendLeaveResponseSlackMessage(data);
   }
 }
