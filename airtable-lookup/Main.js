@@ -31,7 +31,7 @@ function onEdit(e) {
   if (range.getColumn() === STATUS_COL) {
     const row = range.getRow();
     const requesterEmail = sheet.getRange(row, REQUESTER_EMAIL_COL).getValue();
-    const userId = getSlackUserIdByEmail(requesterEmail);
+    const userId = SlackApp.getSlackUserIdByEmail(requesterEmail);
     const data = {
       userName: sheet.getRange(row, USER_NAME_COL).getValue(),
       requesterEmail,
